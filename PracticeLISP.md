@@ -20,14 +20,18 @@ m^n
 =====
 
 ***Атом*** - единичный элемент.
+
 ***Список*** - послед элем, каждый из которых может быть либо атомом, либо списком.
+
 '(1 x 'student')
+
 Пустой спиcок - NIL.
 
 CAR
 ----
 (CAR s)
 >(CAR '(1 2 3))
+
 Значением функции является первый элемент списка
 
 CDR
@@ -66,9 +70,11 @@ CDR
 Найти максимальный элемент списка
 
 Максимум двух чисел
+
 	(DEFUN MAX2 (a b) (IF (> a b) a b)  ))
 
 Максимум списка
+
 	(DEFUN LISTMAX (s) (IF (EQ s NIL) 0 (MAX2 (CAR s) (LISTMAX (CDR s) ))))
 
 Задача 4
@@ -82,13 +88,17 @@ CDR
 True and false
 ----
 Заменены на T и NIL:
+
 >(= 5 6)
+
 >NIL
 
 Функция равенства (обычно чисел)
+
 ( = s t)
 
 Функция эквивалентности EQ подходит и для чисел. 
+
 (EQ s t)
 
 Функции
@@ -96,17 +106,25 @@ True and false
 AND, OR, NOT
 
 > (AND T NIL)
+
 >NIL
+
 > (OR T NIL)
+
 >T
+
 > (NOT NIL)
+
 >T
 
 24.02 Функция cons
 ====
 Значение cons - список, который получается добавлением в список b элемента a.
+
 (cons a b)
+
 (cons 1 '(2 3)) = (1 2 3)
+
 (cons a NIL) = (a)
 
 x=(cons(s,t)) <=> car(x)=s & cdr(x)=t
@@ -114,12 +132,15 @@ x=(cons(s,t)) <=> car(x)=s & cdr(x)=t
 Задача 1
 ----
 (del s) - удаление последнего элемента
+
 	(defun del (s) (IF (EQ NIL (cdr s)) NIL (cons (car s) (del (cdr s)) )))
 
 Задача 2
 ----
 (append s t) - склеивание 2х списков
+
 	(defun app (s s1) (IF (EQ NIL (cdr s)) (cons (car s) s1) (cons (car s) (app (cdr s) s1))))
+	
 >(app '(1 2 3) '(4 5))
 
 Примечание: LISP воспринимает t как true
@@ -129,12 +150,15 @@ x=(cons(s,t)) <=> car(x)=s & cdr(x)=t
 (inverse s) - переворачивание списка
 
 	(DEFUN inverse (s) (IF(EQ NIL (CDR s )) (CONS (CAR s) NIL) (app (inverse (CDR s)) (CONS (CAR s) NIL) )   ))
+
 >(inverse '(1 2 3))
+
 >(3 2 1)
 
 9.03 Контрольная
 ====
 Задача:
+
 Дан числовой список. Вернуть его, убрав четные числа.
 
 
@@ -154,6 +178,7 @@ x=(cons(s,t)) <=> car(x)=s & cdr(x)=t
 Задача 1
 ----
 Дан нелинейный список, посчитать число атомов
+
 (counte s)
 
 	(DEFUN counte (s) 
@@ -167,12 +192,14 @@ x=(cons(s,t)) <=> car(x)=s & cdr(x)=t
 	)
 
 >(counte '(1 10 10 10 (10 20))) 
+
 >6
 
 
 Задача 2
 ----
 Сумма всех числовых атомов
+
 (sume s)
 
 	(DEFUN sume (s) 
@@ -186,12 +213,14 @@ x=(cons(s,t)) <=> car(x)=s & cdr(x)=t
 	)
 
 >(sume '(1 10 (10 20) 10))
+
 >51
 
 
 Задача 3
 ----
 Получить новый список, возведя все в указанную степень
+
 (EXPl s n)
 
 	(DEFUN expl (s n) 
@@ -208,6 +237,7 @@ x=(cons(s,t)) <=> car(x)=s & cdr(x)=t
 	)
 
 >(expl '(1 3 (3 2)) 2) 
+
 >(1 9 (9 4))
 
 23.03 Контрольная 2
@@ -238,10 +268,11 @@ x=(cons(s,t)) <=> car(x)=s & cdr(x)=t
 
 Если оба атомы или оба списки, T в список результатов. Потом AND над этим списком
 Проверять, когда они оба не атомы
-а а - Т
-а л - ф
-л ф - ф
-л л - eq_structure
+
+а а - Т </br>
+а л - ф</br>
+л ф - ф</br>
+л л - eq_structure</br>
 
 Задача 2
 ----
@@ -292,6 +323,7 @@ b^2-4ac
 Придумать и решить задачу на PROG
 
 m^n c клавиатуры
+
 	(defun enteredpower()(progN (setq x (read ())) (setq y (read ())) (power x y)) )
 
 
@@ -303,25 +335,33 @@ sell (x s)
 x = '+ или '*
 
 Сумма
+
 	(DEFUN LISTSUM (s) (IF (EQ s NIL) 0 ( + (CAR s) (LISTSUM (CDR s))) ))
 
 Произведение
+
 	(DEFUN LISTPROD (s) (IF (EQ s NIL) 1 ( * (CAR s) (LISTPROD (CDR s))) ))
 
 Соответственно числа из списка s складываются или умножаются
+
 	(defun sell (x s) (case x ((+) (LISTSUM s)) ((*) (LISTPROD s)) ))
 
 
 >(sell '+ '(1 2 3))
+
 >6
+
 >(sell '* '(5 2 3))
+
 >30
 
 
 Задача 2
 ----
 sels (x n)
+
 x = 'f или 's или 'ss
+
 Соответственно: n!, сумма от 1 до n, сумма от 1 до n для всех элем k^k
 
 	(DEFUN fact (n) (IF ( = n 0) 1 ( * n (fact ( - n 1) ) ) ) )
@@ -332,14 +372,23 @@ x = 'f или 's или 'ss
 	(defun sels (x n) (case x ((f) (fact n)) ((s) (sumi n)) ((ss) (sumpow n)) ) )
 
 >(sels 'f 3)
+
 >6
+
 >(sels 's 3)
+
 >6
+
 >(sels 's 4)
+
 >10
+
 >(sels 'f 4)
+
 >24
+
 >(sels 'ss 4)
+
 >288
 
 
@@ -348,23 +397,32 @@ x = 'f или 's или 'ss
 gcd(m n) - с помощью рекурсии, с помощью цикла.
 
 Рекурсивно:
+
 	(DEFUN nod (n m) (IF ( = m 0) n (nod m ( mod n m) ) ) )
 
 Цикл:
+
 	(DEFUN nod (n m) (LET ((n n)(m m)) (LOOP (cond ((= m 0) (return n))) (setq temp m) (setq m (mod n m)) (setq n temp))))
 
-27.04
-Контрольная
+27.04 Контрольная
 ====
 Задача:
+
 (DEFUN gapply (s v))
+
 s = ('* '+)
+
 v = ((1 2) (2 3))
+
 Применить функции к аргументам, результат - список.
 
+
 Для всех элементов списка s
+
 LOOP
+
 объявление финсписка NIL
+
 (append финсписок (apply (car s) (car v)))
 
 	(DEFUN gapply (s v) (LET ((reslist (list NIL))) (LOOP (cond ((EQUAL NIL s) (return (cdr reslist)))) (setq reslist (append reslist (list (apply (eval (car s)) (car v))))) (setq s (cdr s)) (setq v (cdr v)))))
@@ -381,6 +439,7 @@ LOOP
 	)
 
 04.05
+====
 Задача 1 (Из контрольной второй подгруппы)
 ----
 Список подсписков, найти суммы для всех подсписков, вернуть список ответов.
