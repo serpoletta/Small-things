@@ -264,10 +264,11 @@ x=(cons(s,t)) <=> car(x)=s & cdr(x)=t
 Задача 1
 ----
 Подобие структуры двух списков 
+
 	(DEFUN eq_structure (s1 s2) (IF (EQ s1 NIL) (IF (EQ s2 NIL) T NIL ) (IF (EQ s2 NIL)  NIL  (AND  (IF (EQ (atom (car s1)) (atom (car s2))) (IF (atom (car s1)) T (eq_structure (car s1) (car s2))) NIL) (eq_structure (cdr s1) (cdr s2))  ) ) )) 
 
-Если оба атомы или оба списки, T в список результатов. Потом AND над этим списком
-Проверять, когда они оба не атомы
+Если оба атомы или оба списки, T в список результатов. Потом AND над этим списком</br>
+Проверять, когда они оба не атомы</br>
 
 а а - Т </br>
 а л - ф</br>
@@ -286,6 +287,7 @@ x=(cons(s,t)) <=> car(x)=s & cdr(x)=t
 Количество вхождений списка t1 в t2
 
 (если не включен, 0, иначе ..)
+
 	(DEFUN includings_number (s1 s2) 
 		(IF (member_list s1 s2) 
 			(+ 
@@ -371,24 +373,19 @@ x = 'f или 's или 'ss
 
 	(defun sels (x n) (case x ((f) (fact n)) ((s) (sumi n)) ((ss) (sumpow n)) ) )
 
->(sels 'f 3)
-
+>(sels 'f 3)</br>
 >6
 
->(sels 's 3)
-
+>(sels 's 3)</br>
 >6
 
->(sels 's 4)
-
+>(sels 's 4)</br>
 >10
 
->(sels 'f 4)
-
+>(sels 'f 4)</br>
 >24
 
->(sels 'ss 4)
-
+>(sels 'ss 4)</br>
 >288
 
 
@@ -408,22 +405,15 @@ gcd(m n) - с помощью рекурсии, с помощью цикла.
 ====
 Задача:
 
-(DEFUN gapply (s v))
+(DEFUN gapply (s v))</br>
+s = ('* '+)</br>
+v = ((1 2) (2 3))</br>
+Применить функции к аргументам, результат - список.</br>
 
-s = ('* '+)
-
-v = ((1 2) (2 3))
-
-Применить функции к аргументам, результат - список.
-
-
-Для всех элементов списка s
-
-LOOP
-
-объявление финсписка NIL
-
-(append финсписок (apply (car s) (car v)))
+Для всех элементов списка s</br>
+LOOP</br>
+объявление финсписка NIL</br>
+(append финсписок (apply (car s) (car v)))</br>
 
 	(DEFUN gapply (s v) (LET ((reslist (list NIL))) (LOOP (cond ((EQUAL NIL s) (return (cdr reslist)))) (setq reslist (append reslist (list (apply (eval (car s)) (car v))))) (setq s (cdr s)) (setq v (cdr v)))))
 
